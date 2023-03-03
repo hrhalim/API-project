@@ -12,7 +12,7 @@
     <!-- Header section start -->
     <header class="header text-center pt-3">
         <h1 class="pb-2">AI Universe Hub</h1>
-        <button class="btn btn-danger">Sort By Date</button> 
+        <button id= "sortByDate" class="btn btn-danger">Sort By Date</button> 
     </header>
      <!-- Header section end  -->
 
@@ -53,9 +53,8 @@
                                 </div>
                                 <div class="feature-right">
                                     <h3>Integrations</h3>
-                                    <ul id="intergration-list">
-                                         
-                                         
+                                    <ul id="intergration-list" class="ms-3"> 
+                                         <!-- <li></li> -->
                                     </ul>
                                 </div>
                             </div>
@@ -65,10 +64,16 @@
                                 <div id="universe-img">
 
                                 </div>
-                                <button id="btn-accuracy" class="btn-accuracy btn btn-danger">94% accuracy</button>
+                                <button id="btn-accuracyss" class="btn-accuracy btn btn-danger">
+                                    <span id="btn-accuracy"></span>% accuracy 
+                                </button>
                             </div>
-                            <h2 id="example-title">Hi, how are you doing today?</h2>
-                            <p id="example-content">I'm doing well, thank you for asking. How can I assist you today?</p> 
+                            <h2 id="example-title">
+                                <!-- title  -->
+                            </h2>
+                            <p id="example-content">
+                                <!-- content -->
+                            </p> 
                         </div> 
                     </div> 
                 </div>
@@ -76,11 +81,14 @@
             </div>
 
             <!-- spenner -->
-            <div id="spenner" class="d-none">
-                <div class="spinner-border justify-content-center d-flex" role="status">
-                  <span class="visually-hidden">Loading...</span>
-                </div>
-              </div>
+            <div class="justify-content-center d-flex">
+                <div id="spenner" class="d-none">
+                    <div class="spinner-border" role="status">
+                      <span class="visually-hidden">Loading...</span>
+                    </div>
+                  </div>
+            </div>
+            
             <!-- Show all button  -->
             <div id="see-all" class="text-center mt-4 mb-5 d-none">
                 <button id="btn-seemore" class="btn btn-danger">See More</button>

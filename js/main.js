@@ -12,16 +12,18 @@ const fetchUniverseHub = (datalimit) =>{
 
 /*
 
-    Display Universe Data
+    Display All Universe Data
 
 */
 
 
 const displayUniverseHub = (universHub, datalimit) =>{
+    console.log(universHub);
   const unverseWrapper = document.getElementById('universe-wrappr');  
   unverseWrapper.innerHTML = "";
- const seeMore = document.getElementById('see-all'); 
-
+ const seeMore = document.getElementById('see-all');  
+ 
+ //Data Limit & Slice
  if(datalimit && universHub.length > 6) {
     seeMore.classList.remove('d-none'); 
     universHub = universHub.slice(0, 6); 
@@ -29,16 +31,18 @@ const displayUniverseHub = (universHub, datalimit) =>{
     seeMore.classList.add('d-none'); 
  }
 
-  
-
+  // Get Universe Item by Foreah funtions
   universHub.forEach(universe => {
     // console.log(universe);
     const div = document.createElement('div'); 
-    div.classList.add('col'); 
+    div.classList.add('col');  
+
     const {image, features, name, published_in, id} = universe;  
     div.innerHTML = ` 
     <div class="card p-3">
+    <div class="universe-img">
     <img src="${image}" class="card-img-top rounded-4" alt="...">
+    </div>
     <div class="card-body p-0">
       <h5 class="card-title pt-3">Features</h5> 
       <ol id="features-list">  
@@ -65,10 +69,7 @@ const displayUniverseHub = (universHub, datalimit) =>{
   </div>
   
   `
-  unverseWrapper.appendChild(div);
-  
-    
-
+  unverseWrapper.appendChild(div); 
   });
   LoadingSpinner(false);
 }
@@ -106,11 +107,16 @@ const displayUniverseDetails = (singleData) =>{
     const univerImage = document.getElementById('universe-img');
     univerImage.innerHTML =` <img class="w-100" src="${image_link[0]}"> `
     const exampleTitle = document.getElementById('example-title');
-    exampleTitle.innerHTML = input_output_examples[0].input;
+    exampleTitle.innerHTML = input_output_examples[0].input ? input_output_examples[0].input : 'No Data Fond';
     const exampleContent = document.getElementById('example-content');
     exampleContent.innerHTML = input_output_examples[0].output ? input_output_examples[0].output : 'No! Not Yet! Take a break!!!';
-    const btnAccuracy = document.getElementById('btn-accuracy');
-    btnAccuracy.innerHTML = accuracy.score ? accuracy.score : "";
+
+    const btnAccuracy = document.getElementById('btn-accuracy');  
+    const btn = document.getElementById('btn-accuracyss'); 
+     
+    btnAccuracy.innerHTML = 100 * accuracy.score ? 100 * accuracy.score : "";
+       
+     
     const basicPrice = document.getElementById('basic-price'); 
     basicPrice.innerHTML = pricing[0].price ? pricing[0].price : 'Free Of Cost/Basic';
     const proPrice = document.getElementById('pro-price');
@@ -130,7 +136,7 @@ const displayUniverseDetails = (singleData) =>{
     }) 
 
 
-    //Get Integrations list
+    //Get Integrations list 
     const integrationsList = document.getElementById('intergration-list');
     integrationsList.innerHTML = "";   
     integrations.map(listItem =>{
@@ -146,7 +152,7 @@ const displayUniverseDetails = (singleData) =>{
 
 /*
 
-    Default load data
+    Default load data using funtions
 
 */
 const LoadingData = (dataLimit) => {
@@ -167,10 +173,11 @@ const LoadingSpinner = isLoading => {
     }
 }
 
+ 
 
 /*
 
-    See More All Universe Item
+    See More Button All Universe Item
 
 */
 const showDefaultLimit = fetchUniverseHub(6);
@@ -182,3 +189,6 @@ document.getElementById('btn-seemore').addEventListener('click', function(){
 
 
 
+document.getElementById('sortByDate').addEventListener('click', function(){
+    shortdate();
+})

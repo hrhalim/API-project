@@ -5,14 +5,11 @@
     right: 10px;
 }
 .modal-wrapper {
-    display: flex;
+    display: grid;
     gap: 20px;
     justify-content: space-between;
+    grid-template-columns: repeat(2, 1fr);
 }
-.modal-box {
-    padding: 80px;
-}
-
 .price-wrapper {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -48,4 +45,32 @@
 }
 ol, ul {
     padding-left: 0px;
+}
+.modal-box {
+    padding: 80px;
+}
+.universe-img {
+    height: 200px;
+}
+
+.universe-img img {
+    height: 100%;
+    width: 100%;
+}
+
+/* Responsive  */
+@media only screen and (max-width: 767px) {
+    .price-wrapper {
+        grid-template-columns: repeat(2, 1fr); 
+    }
+    .modal-wrapper { 
+        grid-template-columns: repeat(1, 1fr);
+    }
+    .modal-box {
+        padding: 20px;
+    }
+    .feature-wrapper { 
+        flex-wrap: wrap;
+    }
+
 }
