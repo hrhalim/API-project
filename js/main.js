@@ -2,11 +2,11 @@
 /* 
     Fetch Universe Hub Using Funtions
 */
-const fetchUniverseHub = () =>{
+const fetchUniverseHub = (datalimit) =>{
     const URL = `https://openapi.programming-hero.com/api/ai/tools`; 
     fetch(URL)
     .then(res => res.json())
-    .then(data => displayUniverseHub(data.data.tools))
+    .then(data => displayUniverseHub(data.data.tools, datalimit))
 }
 
 
@@ -17,17 +17,16 @@ const fetchUniverseHub = () =>{
 */
 
 
-const displayUniverseHub = (universHub) =>{
+const displayUniverseHub = (universHub, datalimit) =>{
   const unverseWrapper = document.getElementById('universe-wrappr');  
  const seeMore = document.getElementById('see-all'); 
-//  if(universHub.length > 6) {
-//     seeMore.classList.remove('d-none');
-//     console.log('work');
-//     universHub = universHub.slice(0, 6); 
-//  }else {
-//     seeMore.classList.add('d-none');
-//     console.log('not work');
-//  }
+
+ if(datalimit && universHub.length > 6) {
+    seeMore.classList.remove('d-none'); 
+    universHub = universHub.slice(0, 6); 
+ }else {
+    seeMore.classList.add('d-none'); 
+ }
 
   
 
@@ -144,16 +143,20 @@ const displayUniverseDetails = (singleData) =>{
 }
 
 
+const LoadingData = (dataLimit) => {
+    fetchUniverseHub(dataLimit);
+}
+
 /*
 
     See More All Universe
 
 */
-
+const showDefaultLimit = fetchUniverseHub(6);
 document.getElementById('btn-seemore').addEventListener('click', function(){
     fetchUniverseHub();
 });
 
-fetchUniverseHub();
+
 
 
