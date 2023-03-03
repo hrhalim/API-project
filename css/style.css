@@ -46,3 +46,6 @@
     top: 0;
     right: 0;
 }
+ol, ul {
+    padding-left: 0px;
+}

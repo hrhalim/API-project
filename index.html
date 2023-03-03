@@ -32,51 +32,50 @@
                     </div>
                     <div class="modal-wrapper">
                         <div class="modal-left p-3">
-                            <h2 class="modal-title" id="universeModalLabel">ChatGPT is an AI-powered chatbot platform that uses OpenAI's GPT technology to simulate human conversation.</h2>
+                            <h2 class="modal-title" id="universeModalLabel"></h2>
                             <div class="price-wrapper">
                                 <div class="price-item bg-white roundad-3 p-4 text-center">
-                                    <p class="text-primary fw-bold">$10/month Basic</p>
+                                    <p id="basic-price" class="text-primary fw-bold"></p>
                                 </div> 
                                 <div class="price-item bg-white roundad-3 p-4 text-center">
-                                    <p class="text-info fw-bold">$10/month Basic</p>
+                                    <p id="pro-price" class="text-info fw-bold"></p>
                                 </div> 
                                 <div class="price-item bg-white roundad-3 p-4 text-center">
-                                    <p class="text-secoundary fw-bold">$10/month Basic</p>
+                                    <p id="enterprice" class="text-secoundary fw-bold"></p>
                                 </div> 
                             </div>
                             <div class="feature-wrapper">
                                 <div class="feature-left">
                                     <h3>Features</h3>
-                                    <ul>
-                                        <li>Customizable responses</li>
-                                        <li>Multilingual support</li>
-                                        <li>Seamless integration</li> 
+                                    <ul id="single-features-wrapper" class="ms-3"> 
+                                         <!-- <li></li> -->
                                     </ul>
                                 </div>
                                 <div class="feature-right">
                                     <h3>Integrations</h3>
-                                    <ul>
-                                        <li>Customizable responses</li>
-                                        <li>Multilingual support</li>
-                                        <li>Seamless integration</li> 
+                                    <ul id="intergration-list">
+                                         
+                                         
                                     </ul>
                                 </div>
                             </div>
                         </div>
                         <div class="modal-right border border-1 roundad-3 p-3 text-center">
                             <div class="single-img position-relative pb-2">
-                                <img src="images/Rectangle 15.png" alt="">
-                                <button class="btn-accuracy btn btn-danger">94% accuracy</button>
+                                <div id="universe-img">
+
+                                </div>
+                                <button id="btn-accuracy" class="btn-accuracy btn btn-danger">94% accuracy</button>
                             </div>
-                            <h2>Hi, how are you doing today?</h2>
-                            <p>I'm doing well, thank you for asking. How can I assist you today?</p> 
+                            <h2 id="example-title">Hi, how are you doing today?</h2>
+                            <p id="example-content">I'm doing well, thank you for asking. How can I assist you today?</p> 
                         </div> 
                     </div> 
                 </div>
                 </div>
             </div>
             <!-- Show all button  -->
-            <div id="see-all" class="text-center mt-4 mb-5">
+            <div id="see-all" class="text-center mt-4 mb-5 d-none">
                 <button id="btn-seemore" class="btn btn-danger">See More</button>
             </div>
             
