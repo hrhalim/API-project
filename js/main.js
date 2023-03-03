@@ -19,6 +19,7 @@ const fetchUniverseHub = (datalimit) =>{
 
 const displayUniverseHub = (universHub, datalimit) =>{
   const unverseWrapper = document.getElementById('universe-wrappr');  
+  unverseWrapper.innerHTML = "";
  const seeMore = document.getElementById('see-all'); 
 
  if(datalimit && universHub.length > 6) {
@@ -69,7 +70,7 @@ const displayUniverseHub = (universHub, datalimit) =>{
     
 
   });
-  
+  LoadingSpinner(false);
 }
 
 
@@ -143,17 +144,38 @@ const displayUniverseDetails = (singleData) =>{
 }
 
 
+/*
+
+    Default load data
+
+*/
 const LoadingData = (dataLimit) => {
     fetchUniverseHub(dataLimit);
 }
 
 /*
 
-    See More All Universe
+    Get speener data
+
+*/
+const LoadingSpinner = isLoading => {
+    const spinner = document.getElementById('spenner');
+    if (isLoading === true) {
+        spinner.classList.remove('d-none')
+    } else {
+        spinner.classList.add('d-none')
+    }
+}
+
+
+/*
+
+    See More All Universe Item
 
 */
 const showDefaultLimit = fetchUniverseHub(6);
 document.getElementById('btn-seemore').addEventListener('click', function(){
+    LoadingSpinner(true);
     fetchUniverseHub();
 });
 
