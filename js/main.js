@@ -106,25 +106,39 @@ const displayUniverseDetails = (singleData) =>{
     descriptionTitle.innerHTML = description;
     const univerImage = document.getElementById('universe-img');
     univerImage.innerHTML =` <img class="w-100" src="${image_link[0]}"> `
+
+
     const exampleTitle = document.getElementById('example-title');
-    exampleTitle.innerHTML = input_output_examples[0].input ? input_output_examples[0].input : 'No Data Fond';
     const exampleContent = document.getElementById('example-content');
-    exampleContent.innerHTML = input_output_examples[0].output ? input_output_examples[0].output : 'No! Not Yet! Take a break!!!';
-
-    const btnAccuracy = document.getElementById('btn-accuracy');  
-    const btn = document.getElementById('btn-accuracyss'); 
-     
-    btnAccuracy.innerHTML = 100 * accuracy.score ? 100 * accuracy.score : "";
-       
-     
-    const basicPrice = document.getElementById('basic-price'); 
-    basicPrice.innerHTML = pricing[0].price ? pricing[0].price : 'Free Of Cost/Basic';
-    const proPrice = document.getElementById('pro-price');
-    proPrice.innerHTML =  pricing[1].price ? pricing[1].price : 'Free Of Cost/Pro';
-    const enterPrice = document.getElementById('enterprice');
-    enterPrice.innerHTML = pricing[2].price ? pricing[2].price : 'Free of Cost /Enterprise';
+    if(input_output_examples === null){
+        exampleTitle.innerText = 'Can you give any example?';
+        exampleContent.innerText = 'No! Not Yet! Take a break!!!';
+    }else{
+        exampleTitle.innerHTML = input_output_examples[0].input ? input_output_examples[0].input : 'No Data Fond'; 
+        exampleContent.innerHTML = input_output_examples[0].output ? input_output_examples[0].output : 'No! Not Yet! Take a break!!!';
+    }
     
+    const basicPrice = document.getElementById('basic-price'); 
+    const proPrice = document.getElementById('pro-price');
+    const enterPrice = document.getElementById('enterprice');
+    if(pricing === null){
 
+    }else{
+        basicPrice.innerHTML = pricing[0].price ? pricing[0].price : 'Free Of Cost/Basic'; 
+        proPrice.innerHTML =  pricing[1].price ? pricing[1].price : 'Free Of Cost/Pro'; 
+        enterPrice.innerHTML = pricing[2].price ? pricing[2].price : 'Free of Cost /Enterprise';
+    }
+     
+    //Accuracy Button validation
+    const btnAccuracy = document.getElementById('btn-accuracy');  
+    const btn = document.getElementById('btn-acc-wrapper'); 
+     if(accuracy.score === null){
+        btn.style.display = "none"; 
+     }else{
+        btnAccuracy.innerHTML = 100 * accuracy.score ? 100 * accuracy.score : "";
+        btn.style.display = "block";
+     }
+      
     //Get Features List
     const featuresList = document.getElementById('single-features-wrapper');
     featuresList.innerHTML = ""; 
