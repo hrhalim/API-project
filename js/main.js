@@ -122,8 +122,15 @@ const displayUniverseDetails = (singleData) =>{
     const proPrice = document.getElementById('pro-price');
     const enterPrice = document.getElementById('enterprice');
     if(pricing === null){
-
-    }else{
+        basicPrice.innerText = 'Free Of Cost/Basic';
+        proPrice.innerText = 'Free Of Cost/Pro';
+        enterPrice.innerText = 'Free of Cost /Enterprise';
+    }else if(pricing[0].price === 'No cost' || pricing[1].price === 'No cost' || pricing[2].price === 'Contact us'){
+        basicPrice.innerText = 'Free Of Cost/Basic';
+        proPrice.innerText = 'Free Of Cost/Pro';
+        enterPrice.innerText = 'Free of Cost /Enterprise';
+    }
+    else{
         basicPrice.innerHTML = pricing[0].price ? pricing[0].price : 'Free Of Cost/Basic'; 
         proPrice.innerHTML =  pricing[1].price ? pricing[1].price : 'Free Of Cost/Pro'; 
         enterPrice.innerHTML = pricing[2].price ? pricing[2].price : 'Free of Cost /Enterprise';
@@ -153,11 +160,12 @@ const displayUniverseDetails = (singleData) =>{
     //Get Integrations list 
     const integrationsList = document.getElementById('intergration-list');
     integrationsList.innerHTML = "";   
-    integrations.map(listItem =>{
-        const li = document.createElement('li');
-        li.innerHTML = listItem ? listItem : 'No data Found';
-        integrationsList.appendChild(li); 
-    }) 
+        integrations.map(listItem =>{
+            const li = document.createElement('li'); 
+                li.innerHTML = listItem ? listItem : 'No data Found';
+             
+            integrationsList.appendChild(li); 
+        })  
 
 
 
