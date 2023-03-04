@@ -21,8 +21,17 @@ const displayUniverseHub = (universHub, datalimit, sortBydate) =>{
     console.log(universHub);
   const unverseWrapper = document.getElementById('universe-wrappr');  
   unverseWrapper.innerHTML = "";
- const seeMore = document.getElementById('see-all');  
- 
+ const seeMore = document.getElementById('see-more');  
+
+ if (sortBydate) {
+    universHub = universHub.sort(function(a, b){
+        if (sortBydate === 'ascending') {
+        return new Date(b.published_in) - new Date(a.published_in);
+        } else {
+        return new Date(a.published_in) - new Date(b.published_in);
+        }
+    })
+    }
  //Data Limit & Slice
  if(datalimit && universHub.length > 6) {
     seeMore.classList.remove('d-none'); 
@@ -30,26 +39,13 @@ const displayUniverseHub = (universHub, datalimit, sortBydate) =>{
  }else {
     seeMore.classList.add('d-none'); 
  }
- 
 
   // Get Universe Item by Foreah funtions
   universHub.forEach(universe => {
     // console.log(universe);
     const div = document.createElement('div'); 
-    div.classList.add('col');  
-
+    div.classList.add('col');   
     const {image, features, name, published_in, id} = universe;  
-    if (sortBydate) {
-        universHub = universHub.sort(function(a,b){
-          if (sortBydate === 'ascending') {
-            return new Date(b.published_in) - new Date(a.published_in);
-          } else {
-            return new Date(a.published_in) - new Date(b.published_in);
-          }
-        })
-       }
-    
-
     div.innerHTML = ` 
     <div class="card p-3">
     <div class="universe-img">
@@ -99,9 +95,7 @@ const fetchUniverseDetails = (universeId) =>{
 }
 
 /* 
-
     Display Universe Hub Details  
-
 */
 
 const displayUniverseDetails = (singleData) =>{  
@@ -123,8 +117,8 @@ const displayUniverseDetails = (singleData) =>{
         exampleTitle.innerText = 'Can you give any example?';
         exampleContent.innerText = 'No! Not Yet! Take a break!!!';
     }else{
-        exampleTitle.innerHTML = input_output_examples[0].input ? input_output_examples[0].input : 'No Data Fond'; 
-        exampleContent.innerHTML = input_output_examples[0].output ? input_output_examples[0].output : 'No! Not Yet! Take a break!!!';
+        exampleTitle.innerHTML = input_output_examples[0].input; 
+        exampleContent.innerHTML = input_output_examples[0].output;
     }
     
     const basicPrice = document.getElementById('basic-price'); 
@@ -138,11 +132,11 @@ const displayUniverseDetails = (singleData) =>{
         basicPrice.innerText = 'Free Of Cost/Basic';
         proPrice.innerText = 'Free Of Cost/Pro';
         enterPrice.innerText = 'Free of Cost /Enterprise';
-    }
+    } 
     else{
-        basicPrice.innerHTML = pricing[0].price ? pricing[0].price : 'Free Of Cost/Basic'; 
-        proPrice.innerHTML =  pricing[1].price ? pricing[1].price : 'Free Of Cost/Pro'; 
-        enterPrice.innerHTML = pricing[2].price ? pricing[2].price : 'Free of Cost /Enterprise';
+        basicPrice.innerHTML = pricing[0].price; 
+        proPrice.innerHTML =  pricing[1].price; 
+        enterPrice.innerHTML = pricing[2].price;
     }
      
     //Accuracy Button validation
@@ -151,25 +145,23 @@ const displayUniverseDetails = (singleData) =>{
      if(accuracy.score === null){
         btn.style.display = "none"; 
      }else{
-        btnAccuracy.innerHTML = 100 * accuracy.score ? 100 * accuracy.score : "";
+        btnAccuracy.innerHTML = 100 * accuracy.score;
         btn.style.display = "block";
      }
       
     //Get Features List
     const featuresList = document.getElementById('single-features-wrapper');
     featuresList.innerHTML = ""; 
-    const FeaturesValue = Object.values(features); 
-    FeaturesValue.map(item =>{
+    const featuresValue = Object.values(features); 
+    featuresValue.map(item =>{
         const li = document.createElement('li');
         li.innerHTML = item.feature_name ? item.feature_name : 'No data Found';
         featuresList.appendChild(li); 
     }) 
 
-
     //Get Integrations list 
     const integrationsList = document.getElementById('intergration-list');
-    integrationsList.innerHTML = "";   
-    
+    integrationsList.innerHTML = "";    
     const integrationName = integrations;  
     if(integrationName){
     integrations.map(listItem =>{
@@ -178,26 +170,19 @@ const displayUniverseDetails = (singleData) =>{
         integrationsList.appendChild(li); 
     }) 
     }else{
-    integrationsList.innerHTML = "No data Found";   
-        
-    }    
-
+    integrationsList.innerHTML = "No data Found";    
+    }     
 }
 
-
 /*
-
     Default load data using funtions
-
 */
 const LoadingData = (dataLimit) => {
     fetchUniverseHub(dataLimit);
 }
 
 /*
-
-    Get speener data
-
+    Get speener functions
 */
 const LoadingSpinner = isLoading => {
     const spinner = document.getElementById('spenner');
@@ -209,22 +194,18 @@ const LoadingSpinner = isLoading => {
 }
 
 /*
-
     Short By Date
-
 */
 
 const sortByDate = () =>{ 
  console.log(sortType);
- fetchUniverseHub(sortType);
+//  fetchUniverseHub(sortType);
  sortType == 'ascending' ? sortType = 'descending' : sortType = 'ascending'
-
+ fetchUniverseHub(sortType);
 }
 
 /*
-
     See More Button All Universe Item
-
 */
 const showDefaultLimit = fetchUniverseHub(6);
 document.getElementById('btn-seemore').addEventListener('click', function(){
