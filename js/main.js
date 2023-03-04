@@ -2,11 +2,11 @@
 /* 
     Fetch Universe Hub Using Funtions
 */
-const fetchUniverseHub = (datalimit) =>{
+const fetchUniverseHub = (datalimit, sortBydate) =>{
     const URL = `https://openapi.programming-hero.com/api/ai/tools`; 
     fetch(URL)
     .then(res => res.json())
-    .then(data => displayUniverseHub(data.data.tools, datalimit))
+    .then(data => displayUniverseHub(data.data.tools, datalimit, sortBydate))
 }
 
 
@@ -15,9 +15,8 @@ const fetchUniverseHub = (datalimit) =>{
     Display All Universe Data
 
 */
-
-
-const displayUniverseHub = (universHub, datalimit) =>{
+let sortType = 'ascending';
+const displayUniverseHub = (universHub, datalimit, sortBydate) =>{
     console.log(universHub);
   const unverseWrapper = document.getElementById('universe-wrappr');  
   unverseWrapper.innerHTML = "";
@@ -30,6 +29,17 @@ const displayUniverseHub = (universHub, datalimit) =>{
  }else {
     seeMore.classList.add('d-none'); 
  }
+
+ if (sortBydate) {
+    universHub = universHub.sort(function(a,b){
+      if (sortBydate === 'ascending') {
+        return new Date(b.published_in) - new Date(a.published_in);
+      } else {
+        return new Date(a.published_in) - new Date(b.published_in);
+      }
+    })
+   }
+
 
   // Get Universe Item by Foreah funtions
   universHub.forEach(universe => {
@@ -74,7 +84,6 @@ const displayUniverseHub = (universHub, datalimit) =>{
   LoadingSpinner(false);
 }
 
-
 /*
 
     Fetch Universe Hub Details
@@ -100,12 +109,12 @@ const displayUniverseDetails = (singleData) =>{
     console.log(singleData);
 
     // Object distructuring
-    const {description, pricing, input_output_examples, image_link, accuracy, features, integrations} = singleData; 
+    const {description, pricing, input_output_examples, image_link, accuracy, features, integrations= null} = singleData; 
     
     const descriptionTitle = document.getElementById('universeModalLabel');
     descriptionTitle.innerHTML = description;
     const univerImage = document.getElementById('universe-img');
-    univerImage.innerHTML =` <img class="w-100" src="${image_link[0]}"> `
+    univerImage.innerHTML =` <img class="w-100" src="${image_link[0] ? image_link[0] : 'No Found Image'}"> `
 
 
     const exampleTitle = document.getElementById('example-title');
@@ -165,9 +174,7 @@ const displayUniverseDetails = (singleData) =>{
                 li.innerHTML = listItem ? listItem : 'No data Found';
              
             integrationsList.appendChild(li); 
-        })  
-
-
+        })   
 
 }
 
@@ -195,7 +202,18 @@ const LoadingSpinner = isLoading => {
     }
 }
 
- 
+/*
+
+    Short By Date
+
+*/
+
+const sortByDate = () =>{ 
+ console.log(sortType);
+ fetchUniverseHub(sortType);
+ sortType == 'ascending' ? sortType = 'descending' : sortType = 'ascending'
+
+}
 
 /*
 
@@ -207,10 +225,3 @@ document.getElementById('btn-seemore').addEventListener('click', function(){
     LoadingSpinner(true);
     fetchUniverseHub();
 });
-
-
-
-
-document.getElementById('sortByDate').addEventListener('click', function(){
-    shortdate();
-})
