@@ -4,9 +4,10 @@
 */
 const fetchUniverseHub = (datalimit, sortBydate) =>{
     const URL = `https://openapi.programming-hero.com/api/ai/tools`; 
-    fetch(URL)
+    console.log(URL);
+    fetch(URL) 
     .then(res => res.json())
-    .then(data => displayUniverseHub(data.data.tools, datalimit, sortBydate))
+    .then(data => displayUniverseHub(data.data.tools, datalimit, sortBydate)) 
 }
 
 
@@ -29,17 +30,7 @@ const displayUniverseHub = (universHub, datalimit, sortBydate) =>{
  }else {
     seeMore.classList.add('d-none'); 
  }
-
- if (sortBydate) {
-    universHub = universHub.sort(function(a,b){
-      if (sortBydate === 'ascending') {
-        return new Date(b.published_in) - new Date(a.published_in);
-      } else {
-        return new Date(a.published_in) - new Date(b.published_in);
-      }
-    })
-   }
-
+ 
 
   // Get Universe Item by Foreah funtions
   universHub.forEach(universe => {
@@ -48,6 +39,17 @@ const displayUniverseHub = (universHub, datalimit, sortBydate) =>{
     div.classList.add('col');  
 
     const {image, features, name, published_in, id} = universe;  
+    if (sortBydate) {
+        universHub = universHub.sort(function(a,b){
+          if (sortBydate === 'ascending') {
+            return new Date(b.published_in) - new Date(a.published_in);
+          } else {
+            return new Date(a.published_in) - new Date(b.published_in);
+          }
+        })
+       }
+    
+
     div.innerHTML = ` 
     <div class="card p-3">
     <div class="universe-img">
@@ -85,9 +87,7 @@ const displayUniverseHub = (universHub, datalimit, sortBydate) =>{
 }
 
 /*
-
     Fetch Universe Hub Details
- 
 */
 
 const fetchUniverseDetails = (universeId) =>{
@@ -119,7 +119,7 @@ const displayUniverseDetails = (singleData) =>{
 
     const exampleTitle = document.getElementById('example-title');
     const exampleContent = document.getElementById('example-content');
-    if(input_output_examples === null){
+    if(input_output_examples === null || input_output_examples === ""){
         exampleTitle.innerText = 'Can you give any example?';
         exampleContent.innerText = 'No! Not Yet! Take a break!!!';
     }else{
@@ -169,6 +169,8 @@ const displayUniverseDetails = (singleData) =>{
     //Get Integrations list 
     const integrationsList = document.getElementById('intergration-list');
     integrationsList.innerHTML = "";   
+
+       let integration = ''; 
         integrations.map(listItem =>{
             const li = document.createElement('li'); 
                 li.innerHTML = listItem ? listItem : 'No data Found';
