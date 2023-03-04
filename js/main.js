@@ -109,7 +109,7 @@ const displayUniverseDetails = (singleData) =>{
     console.log(singleData);
 
     // Object distructuring
-    const {description, pricing, input_output_examples, image_link, accuracy, features, integrations= null} = singleData; 
+    const {description, pricing, input_output_examples, image_link, accuracy, features, integrations} = singleData; 
     
     const descriptionTitle = document.getElementById('universeModalLabel');
     descriptionTitle.innerHTML = description;
@@ -169,14 +169,18 @@ const displayUniverseDetails = (singleData) =>{
     //Get Integrations list 
     const integrationsList = document.getElementById('intergration-list');
     integrationsList.innerHTML = "";   
-
-       let integration = ''; 
-        integrations.map(listItem =>{
-            const li = document.createElement('li'); 
-                li.innerHTML = listItem ? listItem : 'No data Found';
-             
-            integrationsList.appendChild(li); 
-        })   
+    
+    const integrationName = integrations;  
+    if(integrationName){
+    integrations.map(listItem =>{
+        const li = document.createElement('li'); 
+            li.innerHTML = listItem; 
+        integrationsList.appendChild(li); 
+    }) 
+    }else{
+    integrationsList.innerHTML = "No data Found";   
+        
+    }    
 
 }
 
