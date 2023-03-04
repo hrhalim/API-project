@@ -189,7 +189,6 @@ const LoadingSpinner = isLoading => {
 */
 
 const sortByDate = () =>{ 
- console.log(sortType); 
  fetchUniverseHub(showUniverseDisplay, sortType);
  sortType == 'ascending' ? sortType = 'descending' : sortType = 'ascending'; 
 }
