@@ -16,6 +16,8 @@ const fetchUniverseHub = (datalimit, sortBydate) =>{
     Display All Universe Data
 
 */
+let itemToDisplay = 6;
+let sortedType = 'ascending';
 let sortType = 'ascending';
 const displayUniverseHub = (universHub, datalimit, sortBydate) =>{
     console.log(universHub);
@@ -24,7 +26,7 @@ const displayUniverseHub = (universHub, datalimit, sortBydate) =>{
  const seeMore = document.getElementById('see-more');  
 
  if (sortBydate) {
-    universHub = universHub.sort(function(a, b){
+    data = universHub.sort(function(a, b){
         if (sortBydate === 'ascending') {
         return new Date(b.published_in) - new Date(a.published_in);
         } else {
@@ -199,7 +201,7 @@ const LoadingSpinner = isLoading => {
 
 const sortByDate = () =>{ 
  console.log(sortType);
-//  fetchUniverseHub(sortType);
+ fetchUniverseHub(itemToDisplay, sortType);
  sortType == 'ascending' ? sortType = 'descending' : sortType = 'ascending'
  fetchUniverseHub(sortType);
 }
