@@ -3,21 +3,17 @@
     Fetch Universe Hub Using Funtions
 */
 const fetchUniverseHub = (datalimit, sortBydate) =>{
-    const URL = `https://openapi.programming-hero.com/api/ai/tools`; 
-    console.log(URL);
+    const URL = `https://openapi.programming-hero.com/api/ai/tools`;  
     fetch(URL) 
     .then(res => res.json())
     .then(data => displayUniverseHub(data.data.tools, datalimit, sortBydate)) 
 }
 
-
 /*
-
     Display All Universe Data
-
 */
+
 let itemToDisplay = 6;
-let sortedType = 'ascending';
 let sortType = 'ascending';
 const displayUniverseHub = (universHub, datalimit, sortBydate) =>{
     console.log(universHub);
@@ -27,7 +23,7 @@ const displayUniverseHub = (universHub, datalimit, sortBydate) =>{
 
  if (sortBydate) {
     data = universHub.sort(function(a, b){
-        if (sortBydate === 'ascending') {
+        if (sortBydate === 'ascending') { 
         return new Date(b.published_in) - new Date(a.published_in);
         } else {
         return new Date(a.published_in) - new Date(b.published_in);
@@ -44,7 +40,6 @@ const displayUniverseHub = (universHub, datalimit, sortBydate) =>{
 
   // Get Universe Item by Foreah funtions
   universHub.forEach(universe => {
-    // console.log(universe);
     const div = document.createElement('div'); 
     div.classList.add('col');   
     const {image, features, name, published_in, id} = universe;  
@@ -111,8 +106,6 @@ const displayUniverseDetails = (singleData) =>{
     descriptionTitle.innerHTML = description;
     const univerImage = document.getElementById('universe-img');
     univerImage.innerHTML =` <img class="w-100" src="${image_link[0] ? image_link[0] : 'No Found Image'}"> `
-
-
     const exampleTitle = document.getElementById('example-title');
     const exampleContent = document.getElementById('example-content');
     if(input_output_examples === null || input_output_examples === ""){
@@ -141,10 +134,10 @@ const displayUniverseDetails = (singleData) =>{
         enterPrice.innerHTML = pricing[2].price;
     }
      
-    //Accuracy Button validation
+    //Accuracy Button 
     const btnAccuracy = document.getElementById('btn-accuracy');  
     const btn = document.getElementById('btn-acc-wrapper'); 
-     if(accuracy.score === null){
+     if(accuracy.score === null || accuracy.score === ""){
         btn.style.display = "none"; 
      }else{
         btnAccuracy.innerHTML = 100 * accuracy.score;
@@ -200,10 +193,9 @@ const LoadingSpinner = isLoading => {
 */
 
 const sortByDate = () =>{ 
- console.log(sortType);
+ console.log(sortType); 
  fetchUniverseHub(itemToDisplay, sortType);
- sortType == 'ascending' ? sortType = 'descending' : sortType = 'ascending'
- fetchUniverseHub(sortType);
+ sortType == 'ascending' ? sortType = 'descending' : sortType = 'ascending'; 
 }
 
 /*
