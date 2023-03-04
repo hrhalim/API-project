@@ -84,8 +84,7 @@ const displayUniverseHub = (universHub, datalimit, sortBydate) =>{
 */
 
 const fetchUniverseDetails = (universeId) =>{
-    const URL = `https://openapi.programming-hero.com/api/ai/tool/${universeId}`; 
-    console.log(URL);
+    const URL = `https://openapi.programming-hero.com/api/ai/tool/${universeId}`;  
     fetch(URL)
     .then(res => res.json())
     .then(data => displayUniverseDetails(data.data)) 
