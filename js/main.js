@@ -13,14 +13,14 @@ const fetchUniverseHub = (datalimit, sortBydate) =>{
     Display All Universe Data
 */
 
-let itemToDisplay = 6;
+let showUniverseDisplay = 6;
 let sortType = 'ascending';
-const displayUniverseHub = (universHub, datalimit, sortBydate) =>{
-    console.log(universHub);
+const displayUniverseHub = (universHub, datalimit, sortBydate) =>{ 
   const unverseWrapper = document.getElementById('universe-wrappr');  
   unverseWrapper.innerHTML = "";
  const seeMore = document.getElementById('see-more');  
 
+//Sort By Date
  if (sortBydate) {
     data = universHub.sort(function(a, b){
         if (sortBydate === 'ascending') { 
@@ -95,13 +95,10 @@ const fetchUniverseDetails = (universeId) =>{
     Display Universe Hub Details  
 */
 
-const displayUniverseDetails = (singleData) =>{  
-
-    console.log(singleData);
+const displayUniverseDetails = (singleData) =>{    
 
     // Object distructuring
-    const {description, pricing, input_output_examples, image_link, accuracy, features, integrations} = singleData; 
-    
+    const {description, pricing, input_output_examples, image_link, accuracy, features, integrations} = singleData;  
     const descriptionTitle = document.getElementById('universeModalLabel');
     descriptionTitle.innerHTML = description;
     const univerImage = document.getElementById('universe-img');
@@ -114,8 +111,7 @@ const displayUniverseDetails = (singleData) =>{
     }else{
         exampleTitle.innerHTML = input_output_examples[0].input; 
         exampleContent.innerHTML = input_output_examples[0].output;
-    }
-    
+    } 
     const basicPrice = document.getElementById('basic-price'); 
     const proPrice = document.getElementById('pro-price');
     const enterPrice = document.getElementById('enterprice');
@@ -194,7 +190,7 @@ const LoadingSpinner = isLoading => {
 
 const sortByDate = () =>{ 
  console.log(sortType); 
- fetchUniverseHub(itemToDisplay, sortType);
+ fetchUniverseHub(showUniverseDisplay, sortType);
  sortType == 'ascending' ? sortType = 'descending' : sortType = 'ascending'; 
 }
 
